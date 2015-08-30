@@ -17,7 +17,7 @@ load('models')
     .then('routes')
     .into(app);
 
-//escuta da porta 3000
-app.listen(3000, function(){
+//escuta da porta 80
+app.listen(80, function(){
   console.log("Sistema online! \\/_(^_^)_\\/");
 });
