@@ -1,28 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-	<head>
-		<meta charset="utf-8">
-		<title>GPJ Caxias-MA</title>
-	</head>
-	<body>
-		<header>
-			<h1>GPJ Caxias-MA</h1>
-			<h4>Bem-vindo!</h4>
-		</header>
-		<section>
-			<form action="/entrar" method="post">
-				<input type="text" name="unidade[login]"
-					placeholder="Login">
-				<br>
-				<input type="password" name="unidade[senha]"
-					placeholder="Senha">
-				<br>
-				<button type="submit">Entrar</button>
-			</form>
-		</section>
-		<footer>
-			<p>Trabalho de Conclusão de Curso</p>
-			<small>Por Vagner Sampaio</small>
-		</footer>
-	</body>
-</html>
+<% include ../header %>
+<header>
+	<h1>GPJ Caxias-MA</h1>
+	<h4>Bem-vindo!</h4>
+</header>
+<section>
+	<form action="/entrar" method="post">
+		<input type="text" name="unidade[login]" placeholder="Login">
+		<br>
+		<input type="password" name="unidade[senha]" placeholder="Senha">
+		<br>
+		<button type="submit">Entrar</button>
+	</form>
+</section>
+<% include ../footer %>
