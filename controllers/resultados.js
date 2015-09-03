@@ -1,27 +1,32 @@
 module.exports = function(app){
-	/*
-	app.getConnection(function(err,connection){
-		connection.query('SELECT * FROM tcc.unidade u, tcc.meta m, tcc.metasunidades mu, tcc.apuracao a'+
-			'where u.idUnidade = mu.Unidade_idUnidade '+
-			'and mu.Meta_idMeta = m.idMeta '+
-			'and m.idMeta = a.Meta_idMeta '+
-			'and u.idUnidade = a.Unidade_idUnidade '+
-			'order by a.dataApuracao;',function(err,rows){
-			if(err){
-				console.log("Erro BD: "+err);
-			} else {
-				
-			}
-		})
-	});
-	*/
 	var resultadosController = {
 		//action: index
 		index: function(req,res){
-			//recebe o sessionID do login e coloca como nome da unidade
-			var unidade = req.session.unidade,
-				params = {unidade: unidade};
+			//recebe o idUnidade através do login
+			var queryMetas = pool.query('SELECT idUnidade, tipoUnidade, nomeUnidade, '+
+				'indicador, meta, descricao, formula, sistema, esclarecimento, '+
+				'total, apurado, dataApuracao '+
+				'FROM unidades u, metas m, metasunidades mu '+
+				'WHERE u.idUnidade = mu.fk_idUnidade '+
+				'AND m.idMeta = mu.fk_idMeta '+
+				'AND u.idUnidade =?', req.session.unidade);
+			
+			queryMetas.on('error',function(err){
+				console.log(err);
+			});
+			queryMetas.on('result',function(row){
+			var params = {idUnidade: row.idUnidade};
+			
+			/*, tipoUnidade: row.tipoUnidade, 
+				nomeUnidade: row.nomeUnidade, indicador: row.indicador, 
+				meta: row.meta, descricao: row.descricao, formula: row.formula, 
+				sistema: row.sistema, esclarecimento: row.esclarecimento,
+				total: row.total, apurado: row.apurado, dataApuracao: row.dataApuracao};
+			*/	
+					
+			//console.log(params);
 			res.render('resultados/index', params);
+			});
 		},
 	};
 	return resultadosController;

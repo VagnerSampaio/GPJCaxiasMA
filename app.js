@@ -4,8 +4,7 @@ var express         = require('express'),
     bodyParser      = require('body-parser'),
     cookieParser    = require('cookie-parser'),
     expressSession  = require('express-session'),
-//    mysql           = require('mysql'),
-//    connection      = require('express-myconnection'),
+    mysql           = require('mysql'),
     error           = require(__dirname+'/middlewares/error'),
     app             = express();
 
@@ -24,42 +23,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 //configuracao de CSS, JS e Imagens
 app.use(express.static(__dirname+'/public'));
 
-/*
-app.use(
-    connection(mysql,{
-        host: 'localhost',
-        user: 'root',
-        password: 'root',
-        port: 3306,
-        database: 'tcc'
-    },'request')
-);
-
-//MySQL Connection
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-	host     : 'localhost',
-	user     : 'root',
-	password : 'root',
-	database : 'tcc'
-});
-connection.connect();
-
-exports.createConnection = function createConnection(){
-    var conn = connection;
-    return conn;
-}
-
 //MySQL Pool
-var pool = mysql.createPool({
-   connectionLimit  : 100,
+global.pool = mysql.createPool({
    host             : 'localhost',
    user             : 'root',
    password         : 'root',
-   database         : 'tcc',
-   debug: false 
+   database         : 'tcc'
 });
-
+/*
 function handle_database(req,res){
     pool.getConnection(function(err,connection){
        if(err){
@@ -70,13 +41,6 @@ function handle_database(req,res){
         console.log('connected as id'+connection.threadId);  
     
         connection.query('selecti * from unidade',function(err,rows){
-        //'SELECT * FROM tcc.unidade u, tcc.meta m, tcc.metasunidades mu, tcc.apuracao a'+
-		//'where u.idUnidade = mu.Unidade_idUnidade '+
-		//'and mu.Meta_idMeta = m.idMeta '+
-		//'and m.idMeta = a.Meta_idMeta '+
-		//'and u.idUnidade = a.Unidade_idUnidade '+
-		//'order by a.dataApuracao;'
-        
             connection.release();
             if(!err){
                 console.log(rows);

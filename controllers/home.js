@@ -1,10 +1,3 @@
-	var mysql = require('mysql');
-	var connection = mysql.createConnection({
-		host     : 'localhost',
-		user     : 'root',
-		password : 'root',
-		database : 'tcc'
-	});	
 module.exports = function(app){
 	var homeController = {
 		//action: index
@@ -16,23 +9,26 @@ module.exports = function(app){
 		login: function(req, res){
 			var login = req.body.unidade.login,
 				senha = req.body.unidade.senha;
-//			connection.connect();
-			var queryLogin = connection.query('select * from unidade where login = ?', login);
+			
+			var queryLogin = pool.query('SELECT idUnidade, login, senha FROM unidades WHERE login = ?', login);
 			queryLogin.on('error',function(err){
 				console.log(err);
 				res.redirect('/');
 			});
+			/*
+			queryLogin.on('fields',function(fields){
+				console.log(fields);
+			});
+			*/
 			queryLogin.on('result',function(row){
-				console.log(row.idUnidade);
 				if(row.login==login && row.senha==senha){
 					//armazenar dados na sessão
-					var unidade = row.idUnidade
-					req.session.unidade = unidade;
+					req.session.unidade = row.idUnidade;
+					//redirecionar para rota resultados
 					res.redirect('/resultados');
 				} else {
 					res.redirect('/');
 				}
-//			connection.end();
 			});
 		},
 		//action: logout
