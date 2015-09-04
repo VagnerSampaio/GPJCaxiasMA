@@ -11,6 +11,8 @@
     "ejs": "~2.3.3",
     "express": "~4.13.1",
     "express-load": "^1.1.15",
-    "express-session": "^1.11.3"
+    "express-myconnection": "^1.0.4",
+    "express-session": "^1.11.3",
+    "mysql": "^2.9.0"
   }
 }

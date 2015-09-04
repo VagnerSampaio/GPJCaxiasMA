@@ -4,3 +4,4 @@ module.exports = function(app){
 	// rota /resultados recebe action index controller resultados
 	app.get('/resultados', autenticar, resultados.index);
 };
+

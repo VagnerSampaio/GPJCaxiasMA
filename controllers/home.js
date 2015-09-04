@@ -1,4 +1,3 @@
-
 module.exports = function(app){
 	var homeController = {
 		//action: index
@@ -8,18 +7,29 @@ module.exports = function(app){
 		},
 		//action: login		
 		login: function(req, res){
-			//get dados formulario login, senha
 			var login = req.body.unidade.login,
 				senha = req.body.unidade.senha;
-			if(senha && login){
-				var unidade = req.body.unidade;
-				unidade['resultados']=[];
-				req.session.unidade = unidade;
-				//redirecionar para página de resultados
-				res.redirect('/resultados');
-			} else {
+			
+			var queryLogin = pool.query('SELECT idUnidade, login, senha FROM unidades WHERE login = ?', login);
+			queryLogin.on('error',function(err){
+				console.log(err);
 				res.redirect('/');
-			}
+			});
+			/*
+			queryLogin.on('fields',function(fields){
+				console.log(fields);
+			});
+			*/
+			queryLogin.on('result',function(row){
+				if(row.login==login && row.senha==senha){
+					//armazenar dados na sessão
+					req.session.unidade = row.idUnidade;
+					//redirecionar para rota resultados
+					res.redirect('/resultados');
+				} else {
+					res.redirect('/');
+				}
+			});
 		},
 		//action: logout
 		logout: function(req, res){
