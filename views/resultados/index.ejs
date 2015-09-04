@@ -2,12 +2,18 @@
 <header>
 	<h1>GPJ Caxias<h1>
 	<!-- recebe o unidade.login do controller/home.js após o login --> 
-	<h4> Unidade logada: <%- element.idUnidade %></h1>
 </header>
 <section>
 	<br>
 	<p> aqui ficarão os gráficos </p>
 	<br>
+	<ul>
+	<% for(var i=0; i<metas.length; i++) { %>
+	<li>
+	    Unidade[<%= [i] %>]: <%= metas[i].idUnidade %>
+	</li>
+	<% } %>
+</ul>
 <section>
 <% include ../exit %>
 <% include ../footer %>
