@@ -15,11 +15,6 @@ module.exports = function(app){
 				console.log(err);
 				res.redirect('/');
 			});
-			/*
-			queryLogin.on('fields',function(fields){
-				console.log(fields);
-			});
-			*/
 			queryLogin.on('result',function(row){
 				if(row.login==login && row.senha==senha){
 					//armazenar dados na sessão

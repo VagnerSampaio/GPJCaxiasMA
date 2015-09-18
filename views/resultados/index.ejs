@@ -1,19 +1,136 @@
+<!-- recebe o unidade.login do controller/home.js após o login 
+idUnidade, tipoUnidade, nomeUnidade
+indicador, meta, descricao, formula, sistema, esclarecimento
+total, apurado, dataApuracao
+--> 
 <% include ../header %>
 <header>
-	<h1>GPJ Caxias<h1>
-	<!-- recebe o unidade.login do controller/home.js após o login --> 
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+	<div class="navbar-header">
+		<h3 class="fonte-branca"><%= metas[0].idUnidade %>&nbsp- <%= metas[0].nomeUnidade %></h3>
+    <h3 class="fonte-branca"></h3>
+	</div>
+	
+	<ul class="nav navbar-nav">
+		<li></li>
+	</ul>
+
+  <ul class="nav navbar-nav navbar-right">
+    <li><h3><a href='/sair' class="fonte-branca">Sair</a></h3></li>
+  </ul>
+</div>
+</nav>
 </header>
-<section>
-	<br>
-	<p> aqui ficarão os gráficos </p>
-	<br>
-	<ul>
-	<% for(var i=0; i<metas.length; i++) { %>
-	<li>
-	    Unidade[<%= [i] %>]: <%= metas[i].idUnidade %>
-	</li>
-	<% } %>
-</ul>
-<section>
-<% include ../exit %>
+
+<section class="col-md-offset-3 col-md-6">
+<% for(var i=0; i<metas.length; i++) { %>
+<% if(metas[i].indicador.localeCompare("Meta 8")==0){ %>
+<div class="panel-group" id="accordion<%= [i] %>">
+  <% if(((1-(metas[i].apurado/metas[i].total))*100) < metas[i].meta) { %>
+	  <div class="panel panel-danger">
+  <% } else { %>
+    <div class="panel panel-success">
+  <% } %> <!-- Fim do if-else -->
+    <div class="panel-heading">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne<%= [i] %>1"><center><%= metas[i].indicador %></center></a></h4>
+    </div>
+    <div id="collapseOne<%= [i] %>1" class="panel-collapse collapse in">
+      <div class="panel-body">
+<!-- Progress bar das metas -->
+        <h3>Meta: <%= metas[i].meta.toFixed(2) %>%<h3>  
+          <h3>Atingido: <%= ((1-(metas[i].apurado/metas[i].total))*100).toFixed(2) %>%<h3> 
+	      <div class="progress progress-striped active">
+		      <% if(((1-(metas[i].apurado/metas[i].total))*100) < metas[i].meta) { %>
+			       <div class="progress-bar progress-bar-danger" style="width: <%= ((1-(metas[i].apurado/metas[i].total))*100).toFixed(2) %>%">
+		      <% } else { %>
+			       <div class="progress-bar progress-bar-success" style="width: <%= ((1-(metas[i].apurado/metas[i].total))*100).toFixed(2) %>%">
+		      <% } %> <!-- Fim do if-else -->
+			       <%= ((1-(metas[i].apurado/metas[i].total))*100).toFixed(2) %>%
+			       </div>
+	      </div>
+        <center><small>
+	      <% if(((1-(metas[i].apurado/metas[i].total))*100) < metas[i].meta) { %>
+		         Cuidado!!! Esta meta não está garantida. :(
+	      <% } else { %>
+		         Parabéns!!! Continue com o bom trabalho para manter a meta. :)
+	      <% } %> <!-- Fim do if-else -->
+        </center></small>
+        <% } else { %>
+        <div class="panel-group" id="accordion<%= [i] %>">
+  <% if(((metas[i].apurado / metas[i].total) * 100) < metas[i].meta) { %>
+	  <div class="panel panel-danger">
+  <% } else { %>
+    <div class="panel panel-success">
+  <% } %> <!-- Fim do if-else -->
+    <div class="panel-heading">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne<%= [i] %>1"><center><%= metas[i].indicador %></center></a></h4>
+    </div>
+    <div id="collapseOne<%= [i] %>1" class="panel-collapse collapse in">
+      <div class="panel-body">
+<!-- Progress bar das metas -->
+        <h3>Meta: <%= metas[i].meta.toFixed(2) %>%<h3>
+        <h3>Atingido: <%= ((metas[i].apurado / metas[i].total) * 100).toFixed(2) %>%<h3> 
+	      <div class="progress progress-striped active">
+		      <% if(((metas[i].apurado / metas[i].total) * 100) < metas[i].meta) { %>
+			       <div class="progress-bar progress-bar-danger" style="width: <%= ((metas[i].apurado / metas[i].total) * 100).toFixed(2) %>%">
+		      <% } else { %>
+			       <div class="progress-bar progress-bar-success" style="width: <%= ((metas[i].apurado / metas[i].total) * 100).toFixed(2) %>%">
+		      <% } %> <!-- Fim do if-else -->
+			       <%= ((metas[i].apurado / metas[i].total) * 100).toFixed(2) %>%
+			       </div>
+	      </div>
+        <center><small>
+	      <% if(((metas[i].apurado / metas[i].total) * 100) < metas[i].meta) { %>
+		         Cuidado!!! Esta meta não está garantida. :(
+	      <% } else { %>
+		         Parabéns!!! Continue com o bom trabalho para manter a meta. :)
+	      <% } %> <!-- Fim do if-else -->
+        </center></small>
+        <% } %> <!-- Fim do if-else
+<!-- Progress bar das metas -->
+      </div>
+  </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion<%= [i] %>" href="#collapseTwo<%= [i] %>1">
+      <center>Resumo</center></a></h4>
+    </div>
+    <div id="collapseTwo<%= [i] %>1" class="panel-collapse collapse">
+<!-- Resumo -->      
+      <div class="panel-body">
+        <p>Realizado: <%= metas[i].apurado %></p>
+        <p>Total: <%= metas[i].total %></p>
+        <p>Esperado (%): <%= metas[i].meta.toFixed(2) %>%</p>
+        <p>Realizado (%): <%= ((metas[i].apurado / metas[i].total) * 100).toFixed(2) %>%</p>
+        <p>Atualização : <%= metas[i].dataApuracao.toISOString().substr(0, 10).split('-').reverse().join('/') %></p>
+      </div>
+<!-- Resumo -->
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion<%= [i] %>" href="#collapseThree<%= [i] %>1">
+      <center>Informações</center></a></h4>
+    </div>
+    <div id="collapseThree<%= [i] %>1" class="panel-collapse collapse">
+<!-- Informações -->
+      <div class="panel-body">
+        <p>Indicador: <%= metas[i].indicador %></p>
+        <p>Meta: <%= metas[i].descricao %></p>
+        <p>Fórmula: <%= metas[i].formula %></p> 
+        <p align="justify">Descrição: <%= metas[i].esclarecimento %></p>
+      </div>
+<!-- Informações -->
+    </div>
+  </div>
+</div>
+</div>
+<br>
+<br>
+<% } %><!-- Fim do for -->
+</section>
 <% include ../footer %>
