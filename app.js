@@ -30,6 +30,7 @@ global.pool = mysql.createPool({
    password         : 'root',
    database         : 'tcc'
 });
+
 /*
 function handle_database(req,res){
     pool.getConnection(function(err,connection){
@@ -60,8 +61,7 @@ load('models')
     .then('routes')
     .into(app);
 
-//middleware de tratamento de erros
-//deve ser carregado por ultimo
+//middleware de tratamento de erros deve ser carregado por ultimo
 app.use(error.notFound);
 app.use(error.serverError);
 

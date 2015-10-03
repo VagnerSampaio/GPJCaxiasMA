@@ -8,19 +8,33 @@ module.exports = function(app){
 						throw err;
 				}
 				
-				connection.query('SELECT idUnidade, tipoUnidade, nomeUnidade, '+
-				'indicador, meta, descricao, formula, sistema, esclarecimento, '+
-				'total, apurado, dataApuracao '+
-				'FROM unidades u, metas m, metasunidades mu '+
-				'WHERE u.idUnidade = mu.fk_idUnidade '+
-				'AND m.idMeta = mu.fk_idMeta '+
-				'AND u.idUnidade =?', req.session.unidade, function(err,rows){
+				connection.query('SELECT nomeUnidade, pontuacao FROM tcc.unidades order by pontuacao DESC', function(err, rows1){
+				connection.query('SELECT * from v_consulta_completa where idUnidade = ?', req.session.unidade, function(err,rows2){
 					if(err){
 						throw err;
 					}
+  						var resultado = new Array();
+  						var metaAtingida = new Array();
+					for (var i=0; i<rows2.length; i++) {
+  						if (rows2[i].indicador.localeCompare("Meta 8")==0){
+    						resultado.push(((1-rows2[i].apurado/rows2[i].total)*100).toFixed(2));
+  						} else {
+    						resultado.push(((rows2[i].apurado/rows2[i].total)*100).toFixed(2));
+  						}
+
+  						if (resultado[i] >= rows2[i].meta) {
+    						metaAtingida.push(true);
+  						} else {
+    						metaAtingida.push(false);
+  						}
+					}
 					res.render('resultados/index',{
-						metas: rows
+						pontos: rows1,
+						metas: rows2,
+						resultado: resultado,
+						metaAtingida: metaAtingida
 					});
+				});
 				});
 				connection.release();
 			});
@@ -28,20 +42,3 @@ module.exports = function(app){
 	};
 	return resultadosController;
 }
-
-/*
-pool.query('SELECT idUnidade, tipoUnidade, nomeUnidade, '+
-				'indicador, meta, descricao, formula, sistema, esclarecimento, '+
-				'total, apurado, dataApuracao '+
-				'FROM unidades u, metas m, metasunidades mu '+
-				'WHERE u.idUnidade = mu.fk_idUnidade '+
-				'AND m.idMeta = mu.fk_idMeta '+
-				'AND u.idUnidade =?',req.session.unidade, function(err, results, fields){
-					if(err){
-						throw err;
-					}
-					res.render('resultados/index',{
-						metas: results
-					});
-			});
-*/
