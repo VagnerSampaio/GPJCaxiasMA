@@ -31,30 +31,6 @@ global.pool = mysql.createPool({
    database         : 'tcc'
 });
 
-/*
-function handle_database(req,res){
-    pool.getConnection(function(err,connection){
-       if(err){
-           connection.release();
-           console.log('Erro conexão DB.');
-           return;
-       } 
-        console.log('connected as id'+connection.threadId);  
-    
-        connection.query('selecti * from unidade',function(err,rows){
-            connection.release();
-            if(!err){
-                console.log(rows);
-            }
-        });
-        connection.on('eror',function(err){
-           console.log('Erro conexão DB.');
-           return;
-        });
-    });
-};
-*/
-
 //configuração das rotas Index e resultados
 load('models')
     .then('controllers')

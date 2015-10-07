@@ -1,0 +1,37 @@
+<!-- recebe o unidade.login do controller/home.js após o login --> 
+<% include ../header %>
+
+<header>
+<nav class="navbar navbar-default">
+<div class="container-fluid">
+	<div class="navbar-header">
+		<h3 class="fonte-branca">CAX&nbsp- Fórum da Comarca de Caxias:</h3>
+    	<h3 class="fonte-branca"></h3>
+	</div>
+	
+	<ul class="nav navbar-nav">
+		<li><h3 class="fonte-branca">Relatório Geral</h3></li>
+	</ul>
+
+  <ul class="nav navbar-nav navbar-right">
+    <li><h3><a href='/sair' class="fonte-branca">Sair</a></h3></li>
+  </ul>
+</div>
+</nav>
+</header>
+
+<% include ../ranking %>
+
+<div class="container-fluid">
+<div class="col-lg-12">
+<% for(var i=0; i<pontos.length; i++) { %>
+<h1><%= pontos[i].siglaUnidade %>&nbsp- <%= pontos[i].nomeUnidade %>:	 <%= pontos[i].pontuacao %> pontos!</h1>
+<% for(var j=0; j<metas.length; j++) { %>
+<% if(metas[j].idUnidade == pontos[i].idUnidade){ %>
+TESTE
+<% } %><!-- Fim do IF -->
+<% } %><!-- Fim do for[i] -->
+<% } %><!-- Fim do for[i] -->
+</div>
+</div>
+<% include ../footer %>

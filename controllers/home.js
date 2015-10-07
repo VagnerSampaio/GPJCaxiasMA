@@ -10,17 +10,24 @@ module.exports = function(app){
 			var login = req.body.unidade.login,
 				senha = req.body.unidade.senha;
 			
-			var queryLogin = pool.query('SELECT idUnidade, login, senha FROM unidades WHERE login = ?', login);
+			var queryLogin = pool.query('SELECT idUnidade, tipoUnidade, login, senha FROM unidades WHERE login = ?', login);
 			queryLogin.on('error',function(err){
 				console.log(err);
 				res.redirect('/');
 			});
 			queryLogin.on('result',function(row){
 				if(row.login==login && row.senha==senha){
-					//armazenar dados na sessão
-					req.session.unidade = row.idUnidade;
-					//redirecionar para rota resultados
-					res.redirect('/resultados');
+					if(row.tipoUnidade == 'D'){
+						//armazenar dados na sessão
+						req.session.unidade = row.idUnidade;
+						//redirecionar para rota resultados
+						res.redirect('/relatoriogeral');	
+					} else {
+						//armazenar dados na sessão
+						req.session.unidade = row.idUnidade;
+						//redirecionar para rota resultados
+						res.redirect('/resultados');
+					}
 				} else {
 					res.redirect('/');
 				}
