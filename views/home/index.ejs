@@ -1,22 +1,24 @@
 <% include ../header %>
+
 <header class="text-center">
 <div class="container-fluid">
-<div class="row">
-<div class="col-md-6 col-md-offset-3">
-	<h1>GPJ Caxias-MA</h1>
-	<h3>Bem-vindo!</h4>
-</div>
-</div>
-  <hr>
+	<div class="row">
+		<div class="col-lg-6 col-lg-offset-3">
+			<h1>GPJ Caxias-MA</h1>
+			<h3>Bem-vindo!</h4>
+		</div>
+	</div>
+  	<hr>
 </div>
 </header>
 
-<section>
+<div class="container">
 <div class="row">
-<div class="col-lg-offset-4 col-lg-4">
+<div class="col-lg-6 col-lg-offset-3">
 <div class="well bs-component">
 	<form class="form-horizontal" action="/entrar" method="post">
-		<legend>Entre com a Unidade e a Senha</legend>
+	<fieldset>
+		<legend><center>Entre com o Login e Senha da Unidade</center></legend>
 		<div class="form-group">
 			<label for="login" class="col-lg-2 control-label">
 				Login
@@ -44,9 +46,10 @@
 			</button>
 		</div>
 		</div>
+	</fieldset>
 	</form>
 </div>
 </div>
 </div>
-</section>
+</div>
 <% include ../footer %>

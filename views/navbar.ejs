@@ -1,10 +1,13 @@
 <header>
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
 <div class="container-fluid">
 	<div class="navbar-header">
-		<h3 class="fonte-branca"><%= metas[0].siglaUnidade %>&nbsp- <%= metas[0].nomeUnidade %>:</h3>
-    	<h3 class="fonte-branca"></h3>
+		<h3 class="fonte-branca"><%= metas[0].siglaUnidade %> - </h3>
+		<h3 class="fonte-branca"></h3>
 	</div>
+	<ul class="nav navbar-nav">
+		<li><h3 class="fonte-branca"><%= metas[0].nomeUnidade %>:</h3></li>
+	</ul>
 	
 	<ul class="nav navbar-nav">
 		<li><h3 class="fonte-branca"><%= metas[0].pontuacao %> pontos!</h3></li>

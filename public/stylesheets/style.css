@@ -10,11 +10,16 @@ footer {
 
 .fonte-branca {
   color: #FFF;
-  margin-right: 20px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .panel-default > .panel-heading {
   color: #FFF;
   background-color: #222;
   border-color: #dddddd;
+}
+
+header {
+  margin-bottom: 5%;
 }

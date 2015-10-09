@@ -15,10 +15,14 @@ module.exports = function(app){
 				}
   					var resultado = new Array();
   					var metaAtingida = new Array();
+					var meta8 = new Array(); 
+					
 				for (var i=0; i<rows2.length; i++) {
   					if (rows2[i].indicador.localeCompare("Meta 8")==0){
+						meta8.push(true);
     					resultado.push(((1-rows2[i].apurado/rows2[i].total)*100).toFixed(2));
   					} else {
+						meta8.push(false);
     					resultado.push(((rows2[i].apurado/rows2[i].total)*100).toFixed(2));
   					}
 
@@ -32,7 +36,8 @@ module.exports = function(app){
 					pontos: rows1,
 					metas: rows2,
 					resultado: resultado,
-					metaAtingida: metaAtingida
+					metaAtingida: metaAtingida,
+					meta8: meta8
 				});
 			});
 			});

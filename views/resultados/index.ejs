@@ -1,8 +1,12 @@
 <!-- recebe o unidade.login do controller/home.js após o login --> 
-<% include ../header %>
+<% include ../header-rank %>
 <% include ../navbar %>
-<% include ../ranking %>
 
+<div class="container-fluid">
+<div class="row">
+<center><div id="barchart_values" style="width: 100%; height: 100%;"></div></center>      
+</div>
+</div>
 <div class="container-fluid">
 <div class="row">
 <% for(var i=0; i<metas.length; i++) { %>
@@ -52,8 +56,13 @@
     <div id="collapseTwo<%= [i] %>1" class="panel-collapse collapse">
 <!-- Resumo -->      
       <div class="panel-body">
-        <p>Realizado: <%= metas[i].apurado %></p>
-        <p>Total: <%= metas[i].total %></p>
+        <% if(meta8[i]) { %>
+          <p>Acervo Inicial: <%= metas[i].total %></p>
+          <p>Acervo Final: <%= metas[i].apurado %></p>
+        <% } else { %>
+          <p>Total: <%= metas[i].total %></p>
+          <p>Realizado: <%= metas[i].apurado %></p>
+        <% } %>
         <p>Esperado (%): <%= metas[i].meta.toFixed(2) %>%</p>
         <p>Realizado (%): <%= resultado[i] %>%</p>
         <p>Atualização : <%= metas[i].dataApuracao.toISOString().substr(0, 10).split('-').reverse().join('/') %></p>
