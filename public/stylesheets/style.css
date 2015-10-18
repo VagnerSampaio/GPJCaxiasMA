@@ -23,3 +23,24 @@ footer {
 header {
   margin-bottom: 5%;
 }
+
+.nav-pills > li > a {
+  border-radius: 30px;
+}
+.nav-pills > li + li {
+  margin-left: 2px;
+}
+
+.nav-pills > .green > li.active > a,
+.nav-pills > .green > li.active > a:hover,
+.nav-pills > .green > li.active > a:focus {
+  color: #ffffff;
+  background-color: green;
+}
+
+.nav-pills > .red > li.active > a,
+.nav-pills > .red > li.active > a:hover,
+.nav-pills > .red > li.active > a:focus {
+  color: #ffffff;
+  background-color: red;
+}

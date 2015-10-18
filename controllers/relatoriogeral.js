@@ -33,7 +33,7 @@ module.exports = function(app){
 						resultado: resultado,
 						metaAtingida: metaAtingida
 					});
-					console.log(rows1[0]);
+					//console.log(rows1[0]);
 				});
 				});
 			connection.release();

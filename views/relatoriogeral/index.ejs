@@ -14,24 +14,42 @@
 	</ul>
 
   <ul class="nav navbar-nav navbar-right">
+    <li><h3><a href='/sobre' class="fonte-branca">Sobre</a></h3></li>
     <li><h3><a href='/sair' class="fonte-branca">Sair</a></h3></li>
   </ul>
 </div>
 </nav>
 </header>
 
-<% include ../ranking %>
+<div class="container-fluid"><div class="row"><div class="col-lg-8 col-lg-offset-2">
+<center><div id="barchart_values" style="width: 100%; height: 100%;"></div></center>
+</div></div></div><!-- container-fluid, row, col-lg -->
 
-<div class="container-fluid">
-<div class="col-lg-12">
-<% for(var i=0; i<pontos.length; i++) { %>
-<h1><%= pontos[i].siglaUnidade %>&nbsp- <%= pontos[i].nomeUnidade %>:	 <%= pontos[i].pontuacao %> pontos!</h1>
+<div class="container-fluid"><div class= "col-lg-10 col-lg-offset-1">
+<% for(var i=0; i<pontos.length-1; i++) { %>
+<div class="row">
+<center><table border="2px"></center><tr><td>
+<h1><center><u><%= i+1 %>° lugar - <%= pontos[i].siglaUnidade %>&nbsp- <%= pontos[i].nomeUnidade %>: <%= pontos[i].pontuacao %> pontos!</u></center></h1>
 <% for(var j=0; j<metas.length; j++) { %>
 <% if(metas[j].idUnidade == pontos[i].idUnidade){ %>
-TESTE
+<div class= "col-lg-6"><div class="jumbotron">
+	<h3><center><b><%= metas[j].indicador %></b></center></h3>
+	<h3>Meta: <%= metas[j].meta.toFixed(2) %>%</h3>
+	<h3>Atingido: <%= resultado[j] %>%</h3>
+	<div class="progress progress-striped active">
+		<% if(metaAtingida[j]) { %>
+			<div class="progress-bar progress-bar-success" style="width: <%= resultado[j] %>%">
+		<% } else { %>
+			<div class="progress-bar progress-bar-danger" style="width: <%= resultado[j] %>%">
+		<% } %> <!-- Fim do if-else -->
+		<%= resultado[j] %>%
+		</div><!-- progress-bar -->
+	</div><!-- progress-striped -->
+</div></div><!-- jumbtron, col-lg-6 --> 
 <% } %><!-- Fim do IF -->
 <% } %><!-- Fim do for[i] -->
+</td></tr></table><br><br>
+</div><!-- row -->
 <% } %><!-- Fim do for[i] -->
-</div>
-</div>
+</div></div><!-- container-fluid, col-lg -->
 <% include ../footer %>
