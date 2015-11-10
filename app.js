@@ -42,6 +42,6 @@ app.use(error.notFound);
 app.use(error.serverError);
 
 //escuta da porta 80
-app.listen(80, function(){
+app.listen(8080, function(){
   console.log("Sistema online! \\/_(^_^)_\\/");
 });
