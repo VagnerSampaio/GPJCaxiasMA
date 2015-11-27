@@ -1,0 +1,44 @@
+<!-- recebe o unidade.login do controller/home.js após o login --> 
+<% include ../header %>
+<% include ../navbar %>
+
+<div class="col-md-offset-1 col-lg-10 ">
+<table class="table table-striped table-hover">
+  <tbody>
+  <tr>
+    <td colspan="3">
+      <h1><center>RANKING</center></h1>
+      <br>
+    </td>
+  </tr>
+    <tr>
+    <td style="background-color:#C0C0C0"> 
+    <br><br><br><br><br>
+        <center>
+        <img src="/images/Medalha_Prata.png" align="middle" width="420px">
+        <h3> <%= pontos[1].nomeUnidade %> </h3>
+        <h3> <%= (pontos[1].pontuacao).toFixed(2) %> pontos </h3>
+        </center>
+      </td>
+      
+      <td style="background-color:#C79F00"> 
+        <center>
+        <img src="/images/Medalha_Ouro.png" align="middle" width="520px">
+        <h2> <%= pontos[0].nomeUnidade %> </h2>
+        <h2> <%= (pontos[0].pontuacao).toFixed(2) %> pontos </h2>
+        </center>         
+      </td>
+      
+      <td style="background-color:#B5A642">
+      <br><br><br><br><br><br><br><br><br><br> 
+        <center>
+        <img src="/images/Medalha_Bronze.png" align="middle">
+        <h4> <%= pontos[2].nomeUnidade %> </h4>
+        <h4> <%= (pontos[2].pontuacao).toFixed(2) %> pontos </h4> 
+        </center>
+      </td>
+    </tr>
+  </tbody>
+</table> 
+</div>
+<% include ../footer %>
