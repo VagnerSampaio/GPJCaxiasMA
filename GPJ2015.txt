@@ -1,0 +1,49 @@
+Hello vagnerd@live.com,
+At your request, your password has been reset to Btz69hmDyg
+
+
+----------
+NODE.JS
+----------
+
+Making code changes
+Install the Git client for your operating system, and from your command line run
+
+git clone ssh://568dc3480c1e66003c0000a8@2015-gpjcaxias.rhcloud.com/~/git/2015.git/
+cd 2015/
+
+This will create a folder with the source code of your application. After making a change, add, commit, and push your changes.
+
+git add .
+git commit -m 'My changes'
+git push
+
+When you push changes the OpenShift server will report back its status on deploying your code. The server will run any of your configured deploy hooks and then restart the application.
+
+
+
+----------
+MYSQL
+----------
+MySQL 5.5 database added.  Please make note of these credentials:
+
+       Root User: adminxmKVNph
+   Root Password: PlXT6FdDRqgu
+   Database Name: 2015
+
+Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
+
+You can manage your new MySQL database by also embedding phpmyadmin.
+The phpmyadmin username and password will be the same as the MySQL credentials above.
+
+
+
+----------
+PHPMYADMIN
+----------
+
+Please make note of these MySQL credentials again:
+  Root User: adminxmKVNph
+  Root Password: PlXT6FdDRqgu
+URL: https://2015-gpjcaxias.rhcloud.com/phpmyadmin/
+

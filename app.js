@@ -7,6 +7,9 @@ var express         = require('express'),
     mysql           = require('mysql'),
     error           = require(__dirname+'/middlewares/error'),
     app             = express();
+self = this;
+ipaddress = process.env.OPENSHIFT_NODEJS_IP;
+port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
 
 /*  CONFIGURAÇÃO DOS MIDDLEWARES */
@@ -42,6 +45,6 @@ app.use(error.notFound);
 app.use(error.serverError);
 
 //escuta da porta 80
-app.listen(8080, function(){
+app.listen(self.port, self.ipaddress, function(){
   console.log("Sistema online! \\/_(^_^)_\\/");
 });
